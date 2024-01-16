@@ -14,6 +14,17 @@ namespace PatternRecognitionTool
             string outputFilePath = Path.Combine(baseDirectory, "output.txt");
             string patternFilePath = Path.Combine(baseDirectory, "pattern.txt");
 
+            // Start of the program.
+            Console.CursorVisible = false;
+            Console.WriteLine("Pattern Recognition Tool");
+            Console.WriteLine("============================================");
+
+            Console.WriteLine("Press any key to start...");
+            Console.ReadKey();
+
+            // Move the cursor to the beginning of the previous line
+            Console.SetCursorPosition(0, Console.CursorTop - 1);
+
             if (!File.Exists(inputFilePath))
             {
                 Console.WriteLine("Input file does not exist.");
@@ -78,6 +89,11 @@ namespace PatternRecognitionTool
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+            finally
+            {
+                Console.WriteLine("Press any key to exit.");
+                Console.ReadKey();
             }
         }
     }
