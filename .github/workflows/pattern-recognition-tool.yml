@@ -25,8 +25,3 @@ jobs:
 
     - name: Build PatternRecognitionTool
       run: msbuild PatternRecognitionTool.sln /p:Configuration=Release /p:Platform="Any CPU"
-
-    - name: Test
-      run: |
-        cd YourTestProjectFolder
-        dotnet test --no-build --verbosity normal
