@@ -1,24 +1,32 @@
-name: ASP.NET Console CI
+name: .NET Framework CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ master ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ master ]
 
 jobs:
   build:
+
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '4.8.x'
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
+    - uses: actions/checkout@v2
+
+    - name: Setup MSBuild path
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1
+
+    - name: Restore NuGet packages
+      run: nuget restore PatternRecognitionTool.sln
+
+    - name: Build PatternRecognitionTool
+      run: msbuild PatternRecognitionTool.sln /p:Configuration=Release /p:Platform="Any CPU"
+
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: |
+        cd YourTestProjectFolder
+        dotnet test --no-build --verbosity normal
