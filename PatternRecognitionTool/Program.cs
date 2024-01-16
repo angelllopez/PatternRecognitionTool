@@ -28,17 +28,30 @@ namespace PatternRecognitionTool
             if (!File.Exists(inputFilePath))
             {
                 Console.WriteLine("Input file does not exist.");
+                Console.WriteLine("Press any key to exit.");
+                Console.ReadKey();
                 return;
             }
 
             if (!File.Exists(patternFilePath))
             {
                 Console.WriteLine("Pattern file does not exist.");
+                Console.WriteLine("Press any key to exit.");
+                Console.ReadKey();
                 return;
             }
 
-            // Creates or Clear output file if it exists.
-            File.WriteAllText(outputFilePath, string.Empty);
+            try
+            {
+                // Creates or Clear output file if it exists.
+                File.WriteAllText(outputFilePath, string.Empty);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                Console.WriteLine("Press any key to exit.");
+                Console.ReadKey();
+            }
 
             string pattern = File.ReadAllText(patternFilePath);
 
@@ -53,6 +66,8 @@ namespace PatternRecognitionTool
             if (string.IsNullOrEmpty(pattern))
             {
                 Console.WriteLine("Pattern is empty.");
+                Console.WriteLine("Press any key to exit.");
+                Console.ReadKey();
                 return;
             }
 
@@ -64,6 +79,8 @@ namespace PatternRecognitionTool
             catch (ArgumentException)
             {
                 Console.WriteLine("Pattern is not valid.");
+                Console.WriteLine("Press any key to exit.");
+                Console.ReadKey();
                 return;
             }
 
