@@ -23,12 +23,13 @@ namespace PatternRecognitionTool
             Console.ReadKey();
 
             // Move the cursor to the beginning of the previous line
+            Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(0, Console.CursorTop - 1);
 
             if (!File.Exists(inputFilePath))
             {
                 Console.WriteLine("Input file does not exist.");
-                Console.WriteLine("Press any key to exit...");
+                Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();
                 return;
             }
@@ -36,7 +37,7 @@ namespace PatternRecognitionTool
             if (!File.Exists(patternFilePath))
             {
                 Console.WriteLine("Pattern file does not exist.");
-                Console.WriteLine("Press any key to exit...");
+                Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();
                 return;
             }
@@ -58,7 +59,7 @@ namespace PatternRecognitionTool
             // Check if input file is empty.
             if (new FileInfo(inputFilePath).Length == 0)
             {
-                Console.WriteLine("Input file is empty...");
+                Console.WriteLine("Input file is empty.");
                 Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();
                 return;
@@ -67,7 +68,7 @@ namespace PatternRecognitionTool
             // Check if pattern is empty.
             if (string.IsNullOrEmpty(pattern))
             {
-                Console.WriteLine("Pattern is empty...");
+                Console.WriteLine("Pattern is empty.");
                 Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();
                 return;
@@ -80,7 +81,7 @@ namespace PatternRecognitionTool
             }
             catch (ArgumentException)
             {
-                Console.WriteLine("Pattern is not valid...");
+                Console.WriteLine("Pattern is not valid.");
                 Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();
                 return;
