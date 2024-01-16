@@ -59,6 +59,8 @@ namespace PatternRecognitionTool
             if (new FileInfo(inputFilePath).Length == 0)
             {
                 Console.WriteLine("Input file is empty.");
+                Console.WriteLine("Press any key to exit.");
+                Console.ReadKey();
                 return;
             }
 
