@@ -28,7 +28,9 @@ namespace PatternRecognitionTool
 
             if (!File.Exists(inputFilePath))
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Input file does not exist.");
+                Console.ResetColor();
                 Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();
                 return;
@@ -36,7 +38,9 @@ namespace PatternRecognitionTool
 
             if (!File.Exists(patternFilePath))
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Pattern file does not exist.");
+                Console.ResetColor();
                 Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();
                 return;
@@ -49,7 +53,9 @@ namespace PatternRecognitionTool
             }
             catch (Exception ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"An error occurred: {ex.Message}");
+                Console.ResetColor();
                 Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();
             }
@@ -59,7 +65,9 @@ namespace PatternRecognitionTool
             // Check if input file is empty.
             if (new FileInfo(inputFilePath).Length == 0)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Input file is empty.");
+                Console.ResetColor();
                 Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();
                 return;
@@ -68,7 +76,9 @@ namespace PatternRecognitionTool
             // Check if pattern is empty.
             if (string.IsNullOrEmpty(pattern))
             {
-                Console.WriteLine("Pattern is empty.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Pattern file is empty.");
+                Console.ResetColor();
                 Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();
                 return;
@@ -81,7 +91,9 @@ namespace PatternRecognitionTool
             }
             catch (ArgumentException)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Pattern is not valid.");
+                Console.ResetColor();
                 Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();
                 return;
@@ -108,7 +120,9 @@ namespace PatternRecognitionTool
             }
             catch (Exception ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"An error occurred: {ex.Message}");
+                Console.ResetColor();
             }
             finally
             {
