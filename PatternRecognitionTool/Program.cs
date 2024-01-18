@@ -105,26 +105,27 @@ namespace PatternRecognitionTool
 
             try
             {
+
                 using (StreamReader input = new StreamReader(inputFilePath))
                 using (StreamWriter output = new StreamWriter(outputFilePath, true))
                 {
-                    string line;
-
-                    // Read line by line and check if it matches any of the patterns
-                    while ((line = input.ReadLine()) != null)
+                    // loop through each pattern in the patterns array.
+                    foreach (string pattern in patterns)
                     {
-                        foreach (string pattern in patterns)
+                        string line;
+
+                        // Read line by line and check if it matches the pattern.
+                        while ((line = input.ReadLine()) != null)
                         {
-                            // If 30% of the line matches the pattern, write it to the output file.
-                            if (Regex.Matches(line, pattern).Count >= (line.Length * 0.3))
+                            if (Regex.IsMatch(line, pattern))
                             {
                                 output.WriteLine(line);
                             }
-                            //if (Regex.IsMatch(line, pattern))
-                            //{
-                            //    output.WriteLine(line);
-                            //}
                         }
+
+                        // Reset the stream position to the beginning of the file.
+                        input.BaseStream.Position = 0;
+                        input.DiscardBufferedData();
                     }
                 }
 
