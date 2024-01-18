@@ -60,7 +60,8 @@ namespace PatternRecognitionTool
                 Console.ReadKey();
             }
 
-            string pattern = File.ReadAllText(patternFilePath);
+            // Read multiline pattern from file.
+            string[] patterns = File.ReadAllLines(patternFilePath);
 
             // Check if input file is empty.
             if (new FileInfo(inputFilePath).Length == 0)
@@ -73,8 +74,8 @@ namespace PatternRecognitionTool
                 return;
             }
 
-            // Check if pattern is empty.
-            if (string.IsNullOrEmpty(pattern))
+            // Check if patterns array is empty.
+            if (patterns.Length == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Pattern file is empty.");
@@ -84,19 +85,22 @@ namespace PatternRecognitionTool
                 return;
             }
 
-            // Check if pattern is valid.
-            try
+            // Check if patterns array contain valid regular expressions.
+            foreach (string pattern in patterns)
             {
-                Regex.Match("", pattern);
-            }
-            catch (ArgumentException)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Pattern is not valid.");
-                Console.ResetColor();
-                Console.WriteLine("Press any key to exit.");
-                Console.ReadKey();
-                return;
+                try
+                {
+                    Regex.Match("", pattern);
+                }
+                catch (ArgumentException)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Pattern is not valid.");
+                    Console.ResetColor();
+                    Console.WriteLine("Press any key to exit.");
+                    Console.ReadKey();
+                    return;
+                }
             }
 
             try
@@ -106,11 +110,15 @@ namespace PatternRecognitionTool
                 {
                     string line;
 
+                    // Read line by line and check if it matches any of the patterns
                     while ((line = input.ReadLine()) != null)
                     {
-                        if (Regex.IsMatch(line, pattern))
+                        foreach (string pattern in patterns)
                         {
-                            output.WriteLine(line);
+                            if (Regex.IsMatch(line, pattern))
+                            {
+                                output.WriteLine(line);
+                            }
                         }
                     }
                 }
