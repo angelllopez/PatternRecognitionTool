@@ -115,10 +115,15 @@ namespace PatternRecognitionTool
                     {
                         foreach (string pattern in patterns)
                         {
-                            if (Regex.IsMatch(line, pattern))
+                            // If 30% of the line matches the pattern, write it to the output file.
+                            if (Regex.Matches(line, pattern).Count >= (line.Length * 0.3))
                             {
                                 output.WriteLine(line);
                             }
+                            //if (Regex.IsMatch(line, pattern))
+                            //{
+                            //    output.WriteLine(line);
+                            //}
                         }
                     }
                 }
